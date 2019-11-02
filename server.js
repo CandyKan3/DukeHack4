@@ -4,19 +4,18 @@ var router = express.Router();
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-/* GET home page. */
 const API_PORT = 5000;
 const firebase = require('./database');
 
+// Get homepage
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-router.get('/express_backend', (req, res) => {
-  res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
-});
-router.post('/login', function(req, res, next) {
+
+// Post signup
+router.post('/signup', function(req, res, next) {
   console.log(req.body);
-  let email = req.body.username;
+  let email = req.body.email;
   let password = req.body.password;
 
   firebase

@@ -13,7 +13,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
-import Login from './components/login.jsx'
+import SignUp from './components/signUp.jsx'
 import Nav from 'react-bootstrap/Nav';
 const routing = (
   <Router>
@@ -43,7 +43,7 @@ const routing = (
         <Route path="/info" component={Info} />
       <Route path="/rider" component={Rider} />
       <Route path="/driver" component={Driver} />
-      <Route path="/login" component={Login} />
+      <Route path="/signup" component={SignUp} />
     </div>
   </Router>
 )
