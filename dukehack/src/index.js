@@ -20,7 +20,7 @@ const routing = (
   <Router>
     <div>
     <Navbar bg="light" expand="lg">
-  <Navbar.Brand href="#home">Reality Ministries</Navbar.Brand>
+  <Navbar.Brand href="/">Reality Ministries</Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
@@ -31,13 +31,12 @@ const routing = (
         <NavDropdown.Item href="/driver">Register as Driver</NavDropdown.Item>
         <NavDropdown.Item href="/login">View Scheduled Pickup</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="/createAccount">Create an Account</NavDropdown.Item>
+        <NavDropdown.Item href="/signup">Sign Up</NavDropdown.Item>
       </NavDropdown>
     </Nav>
-    <Form inline>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-warning">Search</Button>
-    </Form>
+    <Nav>
+        <Nav.Link href="/signup">Sign Up</Nav.Link>
+    </Nav>
   </Navbar.Collapse>
 </Navbar>
       <Route exact path="/" component={Main} />

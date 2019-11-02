@@ -2,7 +2,7 @@ import React from "react";
 import logo from "./banner.jpg";
 import real from "./real.jpg";
 import talent from "./talentshow.jpg";
-import Jumbotron from "react-bootstrap/jumbotron";
+import Jumbotron from "react-bootstrap/Jumbotron";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
