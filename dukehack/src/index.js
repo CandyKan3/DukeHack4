@@ -22,17 +22,14 @@ const routing = (
   <Router>
     <div>
     <Navbar bg="light" expand="lg">
-  <Navbar.Brand href="/">Reality Ministries</Navbar.Brand>
+  <Navbar.Brand href="/">Reality Ministries Ride Share</Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link href="/">Home</Nav.Link>
       <Nav.Link href="/info">Information</Nav.Link>
-      <NavDropdown title="Rides" id="basic-nav-dropdown">
-        <NavDropdown.Item href="/rider">Request a Pickup</NavDropdown.Item>
-        <NavDropdown.Item href="/driver">Register as Driver</NavDropdown.Item>
-        <NavDropdown.Item href="/login">View Scheduled Pickup</NavDropdown.Item>
-      </NavDropdown>
+      <Nav.Link href="/rider">Request a Pickup</Nav.Link>
+      <Nav.Link href="/driver">Register as Driver</Nav.Link>
+      <Nav.Link href="/login">View Scheduled Pickups</Nav.Link>
     </Nav>
     <Nav>
         <Nav.Link href="/signup">Sign Up</Nav.Link>
