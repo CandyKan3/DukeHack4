@@ -33,12 +33,13 @@ class SignUp extends React.Component {
 
       <Card.Body>
       <Form onSubmit={this.handleSubmit}>
+        <h1>Sign Up</h1>
         <Form.Group as={Row} controlId="formHorizontalEmail">
           <Form.Label column sm={2}>
 
           </Form.Label>
           <Col sm={8}>
-          <Form.Label>Email:</Form.Label>
+          <Form.Label>Email</Form.Label>
             <Form.Control type="email" placeholder="Email"  value={this.state.name} onChange={ e => this.setState({ name : e.target.value }) } />
           </Col>
         </Form.Group>
@@ -49,7 +50,7 @@ class SignUp extends React.Component {
           </Form.Label>
 
           <Col sm={8}>
-          <Form.Label>Password:</Form.Label>
+          <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password"   value={this.state.password} onChange={ e => this.setState({ password : e.target.value }) }/>
           </Col>
               </Form.Group>

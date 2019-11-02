@@ -74,6 +74,8 @@ class SignIn extends React.Component {
   }
   handleSubmit(event) {
       event.preventDefault();
+      
+
       const data ={"email": this.state.name, "password": this.state.password}
       fetch('/api/signin', {
         method: 'POST',

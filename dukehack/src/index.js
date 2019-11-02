@@ -43,7 +43,7 @@ const routing = (
       <Route path="/rider" component={Rider} />
       <Route path="/driver" component={Driver} />
       <Route path="/signup" component={SignUp} />
-      <Route path="/signin" component={Login} />
+      <Route path="/signin" component={SignIn} />
     </div>
   </Router>
 )
