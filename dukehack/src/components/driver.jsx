@@ -4,7 +4,27 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import { Redirect } from 'react-router-dom';
 class Driver extends React.Component {
+  constructor (props){
+  super(props);
+
+  this.state = {
+      name: "",
+      password: "",
+      address: "",
+      city:"",
+      state:"",
+      zip:"",
+
+      redirect: false
+    };
+
+
+  this.handleSubmit = this.handleSubmit.bind(this);
+  this.renderRedirect = this.renderRedirect.bind(this);
+
+}
   render() {
     return (
       <div>
@@ -16,38 +36,33 @@ class Driver extends React.Component {
       </h2>
       <Card style = {{ width: '80rem', margin: '0 auto', float: 'none', }}>
       <Card.Body>
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
       <Form.Row>
         <Form.Group as={Col} controlId="formGridEmail">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control type="email" placeholder="Enter email" value={this.state.name} onChange={ e => this.setState({ name : e.target.value }) }/>
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control type="password" placeholder="Password" value={this.state.password} onChange={ e => this.setState({password: e.target.value }) }/>
         </Form.Group>
       </Form.Row>
 
-      <Form.Group controlId="formGridAddress1">
-        <Form.Label>Address</Form.Label>
-        <Form.Control placeholder="1234 Main St" />
-      </Form.Group>
-
       <Form.Group controlId="formGridAddress2">
-        <Form.Label>Address 2</Form.Label>
-        <Form.Control placeholder="Apartment, studio, or floor" />
+        <Form.Label>Address</Form.Label>
+        <Form.Control placeholder="Apartment, studio, or floor" value={this.state.address} onChange={ e => this.setState({ address : e.target.value }) }/>
       </Form.Group>
 
       <Form.Row>
         <Form.Group as={Col} controlId="formGridCity">
           <Form.Label>City</Form.Label>
-          <Form.Control />
+          <Form.Control value={this.state.city} onChange={ e => this.setState({ city: e.target.value }) } />
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridState">
           <Form.Label>State</Form.Label>
-          <Form.Control as="select">
+          <Form.Control as="select" value={this.state.state} onChange={ e => this.setState({ state: e.target.value }) }>
             <option>Choose...</option>
             <option>North Carolina</option>
             <option>South Carolina</option>
@@ -57,7 +72,7 @@ class Driver extends React.Component {
 
         <Form.Group as={Col} controlId="formGridZip">
           <Form.Label>Zip</Form.Label>
-          <Form.Control />
+          <Form.Control value={this.state.zip} onChange={ e => this.setState({ zip : e.target.value }) } />
         </Form.Group>
       </Form.Row>
 
@@ -75,5 +90,29 @@ class Driver extends React.Component {
       </div>
     )
   }
+  setRedirect = () => {
+  this.setState({
+    redirect: true
+  })
+  }
+  renderRedirect = () => {
+  if (this.state.redirect) {
+   return <Redirect to='/meetings' />
+  }
+  }
+  handleSubmit(event) {
+      event.preventDefault();
+      const data ={"username": this.state.name, "password": this.state.password, "address": this.state.address, "city": this.state.zip, "state": this.state.state
+    , "zip": this.state.zip}
+      console.log(data);
+      fetch('/api/drive', {
+        method: 'POST',
+        headers: {
+     'Content-Type':'application/json'
+   },
+        body: JSON.stringify(data)}
+      ).then(res => console.log(res)).then(this.setRedirect);
+
+    }
 }
 export default Driver
