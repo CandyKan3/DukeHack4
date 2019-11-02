@@ -5,12 +5,21 @@ import Jumbotron from 'react-bootstrap/jumbotron';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
+import Image from 'react-bootstrap/Image';
 class Main extends React.Component {
   render() {
     return (
       <div>
       <img className="img-responsive" src={logo} alt="logo"/>
-<h1> Welcome! </h1>
+      <Jumbotron>
+        <h1>Welcome to Reality Ministries RideShare</h1>
+        <p>
+         This webage was created to allow volunteers the ability to rideshare! For more information on what we do, click below
+        </p>
+        <p>
+          <Button variant="primary">Learn more</Button>
+        </p>
+      </Jumbotron>
   <Card style={{ width: '18rem' }}>
   <Card.Img variant="top" src={real} />
   <Card.Body>
