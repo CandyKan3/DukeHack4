@@ -15,6 +15,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import Login from './components/login.jsx'
 import Nav from 'react-bootstrap/Nav';
+import CreateAccount from './components/createaccount';
 const routing = (
   <Router>
     <div>
@@ -30,7 +31,7 @@ const routing = (
         <NavDropdown.Item href="/driver">Register as Driver</NavDropdown.Item>
         <NavDropdown.Item href="/login">View Scheduled Pickup</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+        <NavDropdown.Item href="/createAccount">Create an Account</NavDropdown.Item>
       </NavDropdown>
     </Nav>
     <Form inline>
@@ -44,6 +45,7 @@ const routing = (
       <Route path="/rider" component={Rider} />
       <Route path="/driver" component={Driver} />
       <Route path="/login" component={Login} />
+      <Route path="/createAccount" component={CreateAccount} />
     </div>
   </Router>
 )

@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import { Redirect } from 'react-router-dom';
-class Login extends React.Component {
+class CreateAccount extends React.Component {
   constructor (props){
   super(props);
 
@@ -29,7 +29,6 @@ class Login extends React.Component {
     return (
       <div>
       <Card style = {{ width: '80rem', margin: '0 auto',marginTop: '.8rem', float: 'none', }}>
-  
       <Card.Body>
       <Form onSubmit={this.handleSubmit}>
         <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -51,7 +50,7 @@ class Login extends React.Component {
               </Form.Group>
         <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button type="submit">Sign in</Button>
+            <Button type="submit">Register</Button>
           </Col>
         </Form.Group>
       </Form>
@@ -84,4 +83,4 @@ class Login extends React.Component {
 
     }
 }
-export default Login
+export default CreateAccount
