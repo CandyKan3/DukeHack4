@@ -1,10 +1,10 @@
 import React from 'react';import NavDropdown from 'react-bootstrap/NavDropdown';
-import Form from 'react-bootstrap/form';
-import FormControl from 'react-bootstrap/formControl';
-import Button from 'react-bootstrap/button';
-import Col from 'react-bootstrap/col';
-import Row from 'react-bootstrap/row';
-import Card from 'react-bootstrap/card';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Card from 'react-bootstrap/Card';
 import { Redirect } from 'react-router-dom';
 class Login extends React.Component {
   constructor (props){

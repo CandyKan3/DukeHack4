@@ -10,9 +10,9 @@ import Info from './components/info.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Form from 'react-bootstrap/form';
-import FormControl from 'react-bootstrap/formControl';
-import Button from 'react-bootstrap/button';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
 import Login from './components/login.jsx'
 import Nav from 'react-bootstrap/Nav';
 const routing = (
