@@ -16,6 +16,8 @@ import Button from 'react-bootstrap/Button';
 import SignUp from './components/signUp.jsx'
 import Nav from 'react-bootstrap/Nav';
 import CreateAccount from './components/createaccount';
+import SignIn from './components/signIn'
+
 const routing = (
   <Router>
     <div>
@@ -27,15 +29,14 @@ const routing = (
       <Nav.Link href="/">Home</Nav.Link>
       <Nav.Link href="/info">Information</Nav.Link>
       <NavDropdown title="Rides" id="basic-nav-dropdown">
-        <NavDropdown.Item href="/rider">Request A Pickup</NavDropdown.Item>
+        <NavDropdown.Item href="/rider">Request a Pickup</NavDropdown.Item>
         <NavDropdown.Item href="/driver">Register as Driver</NavDropdown.Item>
         <NavDropdown.Item href="/login">View Scheduled Pickup</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item href="/signup">Sign Up</NavDropdown.Item>
       </NavDropdown>
     </Nav>
     <Nav>
         <Nav.Link href="/signup">Sign Up</Nav.Link>
+        <Nav.Link href="/signin">Sign In</Nav.Link>
     </Nav>
   </Navbar.Collapse>
 </Navbar>
@@ -44,6 +45,7 @@ const routing = (
       <Route path="/rider" component={Rider} />
       <Route path="/driver" component={Driver} />
       <Route path="/signup" component={SignUp} />
+      <Route path="/signin" component={SignIn} />
     </div>
   </Router>
 )

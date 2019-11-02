@@ -33,6 +33,26 @@ router.post('/signup', function(req, res, next) {
   res.redirect('/login');
 });
 
+// Post signin
+router.post('/signin', function(req, res, next) {
+  console.log(req.body);
+  let email = req.body.email;
+  let password = req.body.password;
+
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = errorMessage;
+      console.error(
+        'Error:\nCode: ' + errorCode + '\nMessage: ' + errorMessage
+      );
+    });
+
+  res.redirect('/');
+});
+
 router.post('/drive', function(req, res, next) {
   console.log(req.body);
   let a = req.body.username;

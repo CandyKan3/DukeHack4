@@ -1,4 +1,4 @@
-import React from 'react';import NavDropdown from 'react-bootstrap/NavDropdown';
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import { Redirect } from 'react-router-dom';
 
-class SignUp extends React.Component {
+class SignIn extends React.Component {
   constructor (props){
   super(props);
 
@@ -25,7 +25,7 @@ class SignUp extends React.Component {
   render() {
     const redirectToReferrer = this.state.redirect;
          if (redirectToReferrer === true) {
-             return <Redirect to="/signin" />
+             return <Redirect to="/" />
          }
     return (
       <div>
@@ -33,7 +33,7 @@ class SignUp extends React.Component {
   
       <Card.Body>
       <Form onSubmit={this.handleSubmit}>
-        <h1>Sign up</h1>
+        <h1>Sign in</h1>
         <Form.Group as={Row} controlId="formHorizontalEmail">
           <Form.Label column sm={2}>
             Email
@@ -53,7 +53,7 @@ class SignUp extends React.Component {
               </Form.Group>
         <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button type="submit">Sign up</Button>
+            <Button type="submit">Sign in</Button>
           </Col>
         </Form.Group>
       </Form>
@@ -69,13 +69,13 @@ class SignUp extends React.Component {
   }
   renderRedirect = () => {
   if (this.state.redirect) {
-   return <Redirect to='/signin' />
+   return <Redirect to='/' />
   }
   }
   handleSubmit(event) {
       event.preventDefault();
       const data ={"email": this.state.name, "password": this.state.password}
-      fetch('/api/signup', {
+      fetch('/api/signin', {
         method: 'POST',
         headers: {
      'Content-Type':'application/json'
@@ -85,4 +85,4 @@ class SignUp extends React.Component {
 
     }
 }
-export default SignUp
+export default SignIn
