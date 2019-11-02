@@ -45,6 +45,39 @@ router.post('/drive', function(req, res, next) {
   console.log(req.body);
   let a = req.body.username;
   let b = req.body.password;
+  let bc = req.body.address;
+    let c = req.body.state;
+    let d = req.body.city;
+    let e = req.body.zip;
+  console.log(a);
+  console.log(b);
+  console.log(c);
+  console.log(d);
+  console.log(e);
+var con = mysql.createConnection({
+  host: "-",
+  user: "-",
+  password: "-",
+  database: "crest"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  var sql = "INSERT INTO meetings(name, created, type, notes) VALUES (?,?,?,?)";
+  console.log(sql, d);
+ con.query(sql,[a,b,c,d], function (err, result) {
+   if (err) throw err;
+   console.log("1 record inserted");
+ });
+});
+  res.redirect("/login");
+});
+router.post('/ride', function(req, res, next) {
+  console.log(req.body);
+  let a = req.body.username;
+  let b = req.body.password;
+  let bc = req.body.address;
     let c = req.body.state;
     let d = req.body.city;
     let e = req.body.zip;
