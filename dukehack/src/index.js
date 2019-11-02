@@ -16,7 +16,8 @@ import Button from 'react-bootstrap/Button';
 import SignUp from './components/signUp.jsx'
 import Nav from 'react-bootstrap/Nav';
 import CreateAccount from './components/createaccount';
-import SignIn from './components/signIn'
+import SignIn from './components/signIn';
+import Login from './components/login.jsx';
 
 const routing = (
   <Router>
