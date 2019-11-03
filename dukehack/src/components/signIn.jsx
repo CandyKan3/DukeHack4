@@ -24,12 +24,12 @@ class SignIn extends React.Component {
   render() {
     const redirectToReferrer = this.state.redirect;
          if (redirectToReferrer === true) {
-             return <Redirect to="/" />
+             return <Redirect to="/loggedin"/>
          }
     return (
       <div>
       <Card style = {{ width: '70rem', margin: '0 auto',marginTop: '.8rem', float: 'none', }}>
-  
+
       <Card.Body>
       <Form onSubmit={this.handleSubmit}>
         <h1>Sign In</h1>
@@ -76,10 +76,10 @@ class SignIn extends React.Component {
   }
   handleSubmit(event) {
       event.preventDefault();
-      
+
 
       const data ={"email": this.state.name, "password": this.state.password}
-      fetch('/api/signin', {
+      fetch('/api/login', {
         method: 'POST',
         headers: {
      'Content-Type':'application/json'
