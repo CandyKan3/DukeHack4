@@ -25,11 +25,8 @@ class Driver extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="text-center">Welcome!</h1>
-        <h2 className="text-center">
-          Please fill out the form below to offer a ride!
-        </h2>
-        <Card style={{ width: "80rem", margin: "0 auto", float: "none" }}>
+        <Card style={{ width: "80%", margin: "0 auto", marginTop: '.8rem', float: "none" }}>
+          <Card.Header><h1>Register as a Driver</h1></Card.Header>
           <Card.Body>
             <Form onSubmit={this.handleSubmit}>
               <Form.Row>
@@ -37,7 +34,7 @@ class Driver extends React.Component {
                   <Form.Label>Email</Form.Label>
                   <Form.Control
                     type="email"
-                    placeholder="Enter email"
+                    placeholder="Email"
                     value={this.state.name}
                     onChange={e => this.setState({ name: e.target.value })}
                   />
@@ -69,6 +66,7 @@ class Driver extends React.Component {
                   <Form.Control
                     value={this.state.city}
                     onChange={e => this.setState({ city: e.target.value })}
+                    placeholder="City"
                   />
                 </Form.Group>
 
@@ -91,6 +89,7 @@ class Driver extends React.Component {
                   <Form.Control
                     value={this.state.zip}
                     onChange={e => this.setState({ zip: e.target.value })}
+                    placeholder="Zip"
                   />
                 </Form.Group>
               </Form.Row>

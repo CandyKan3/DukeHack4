@@ -35,17 +35,16 @@ class SignIn extends React.Component {
          }
     return (
       <div>
-      <Card style = {{ width: '70rem', margin: '0 auto',marginTop: '.8rem', float: 'none', }}>
-
+      <Card style = {{ width: '80%', margin: '0 auto',marginTop: '.8rem', float: 'none', }}>
+      <Card.Header><h1>Sign In</h1></Card.Header>
       <Card.Body>
       <Form onSubmit={this.handleSubmit}>
-        <h1>Sign In</h1>
         <Form.Group as={Row} controlId="formHorizontalEmail">
           <Form.Label column sm={2}>
 
           </Form.Label>
           <Col sm={8}>
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Your email</Form.Label>
             <Form.Control type="email" placeholder="Email"  value={this.state.name} onChange={ e => this.setState({ name : e.target.value }) } />
           </Col>
         </Form.Group>
@@ -56,14 +55,14 @@ class SignIn extends React.Component {
           </Form.Label>
 
           <Col sm={8}>
-          <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password"   value={this.state.password} onChange={ e => this.setState({ password : e.target.value }) }/>
+          <Form.Label>Your password</Form.Label>
+            <Form.Control type="password" placeholder="Password"  value={this.state.password} onChange={ e => this.setState({ password : e.target.value }) }/>
           </Col>
-              </Form.Group>
-        <Form.Group as={Row}>
-          <Col sm={{ span: 10}}>
-            <Button size = "lg" type="submit">Log in</Button>
-          </Col>
+        </Form.Group>
+        <Form.Group as={Row} controlId="formHorizontal">
+        <Col sm={{ span: 10, offset: 2 }}>            
+          <Button size = "md" type="submit">Log in</Button>
+        </Col>
         </Form.Group>
       </Form>
       </Card.Body>
