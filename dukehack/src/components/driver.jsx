@@ -23,6 +23,10 @@ class Driver extends React.Component {
     this.renderRedirect = this.renderRedirect.bind(this);
   }
   render() {
+    const redirectToReferrer = this.state.redirect;
+         if (redirectToReferrer === true) {
+             return <Redirect to="/signin"/>
+         }
     return (
       <div>
         <Card style={{ width: "80%", margin: "0 auto", marginTop: '.8rem', float: "none" }}>
