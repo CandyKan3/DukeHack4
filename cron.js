@@ -2,6 +2,7 @@ const cron = require("node-cron");
 const express = require("express");
 const fs = require("fs");
 var mysql = require("mysql");
+var twilio = require("twilio");
 
 app = express();
 
@@ -18,11 +19,11 @@ cron.schedule("* * * * *", function() {
     console.log("Connected!");
 
     var sqlRider =
-      "SELECT us.id, loc.lat, loc.lng  FROM users us INNER JOIN location loc ON us.location=loc.location_id NATURAL LEFT JOIN assignment asgn WHERE asgn.assignment_id IS NULL and us.type='Rider'";
+      "SELECT us.id, loc.lat, loc.lng, us.ph_number  FROM users us INNER JOIN location loc ON us.location=loc.location_id NATURAL LEFT JOIN assignment asgn WHERE asgn.assignment_id IS NULL and us.type='Rider'";
     con.query(sqlRider, [], function(err, riderResult) {
       if (err) throw err;
       var sqlDriver =
-        "SELECT us.id, loc.lat, loc.lng FROM users us INNER JOIN location loc ON us.location=loc.location_id WHERE us.type='Driver' and us.driver_cap>1";
+        "SELECT us.id, loc.lat, loc.lng, us.ph_number FROM users us INNER JOIN location loc ON us.location=loc.location_id WHERE us.type='Driver' and us.driver_cap>1";
       con.query(sqlDriver, [], function(err, driverResult) {
         if (err) throw err;
         var eventSQL =
@@ -32,6 +33,7 @@ cron.schedule("* * * * *", function() {
           for (var i = 0; i < riderResult.length; i++) {
             var minDist = "X";
             var driverID = -1;
+            var phNumDriver = 0;
             for (var j = 0; j < driverResult.length; j++) {
               var dist = getDist(
                 riderResult[i],
@@ -42,27 +44,37 @@ cron.schedule("* * * * *", function() {
               if (minDist == "X" || dist < minDist) {
                 minDist = dist;
                 driverID = driverResult[j].id;
+                phNumDriver = driverResult[j].ph_number;
               }
-              var assgnSQL =
-                "INSERT IGNORE into assignment (rider, driver, event) VALUES (?,?,?)";
-              con.query(
-                assgnSQL,
-                [riderResult[i].id, driverID, eventResult[0].event_id],
-                function(err, eventResult) {
+            }
+            var assgnSQL =
+              "INSERT IGNORE into assignment (rider, driver, event) VALUES (?,?,?)";
+            con.query(
+              assgnSQL,
+              [riderResult[i].id, driverID, eventResult[0].event_id],
+              function(err, eventResult) {
+                if (err) throw err;
+                console.log("1 row inserted");
+                var updateUsr =
+                  "UPDATE users SET driver_cap=driver_cap-1 WHERE id=" +
+                  driverID +
+                  " and driver_cap > 0";
+                con.query(updateUsr, [], function(err, eventResult) {
                   if (err) throw err;
                   console.log("1 row inserted");
-                  var updateUsr =
-                    "UPDATE users SET driver_cap=driver_cap-1 WHERE id=" +
-                    driverID +
-                    " and driver_cap > 0";
-                  con.query(updateUsr, [], function(err, eventResult) {
-                    if (err) throw err;
-                    console.log("1 row inserted");
-                    sendMessage("+17325079330", "+4157699020");
-                  });
-                }
-              );
-            }
+                });
+              }
+            );
+            sendMessage(
+              "+17325079330",
+              riderResult[i].ph_number,
+              "You have been assigned a ride to your next event. Call your driver to make further arrangements"
+            );
+            sendMessage(
+              "+17325079330",
+              phNumDriver,
+              "You have been assigned a rider on your way to the next event. Call your rider to make further arrangements"
+            );
           }
         });
       });
@@ -86,14 +98,14 @@ function getDist(riderResult, driverResult, eventResult) {
   ); // Math.sqrt(Math.pow(ydiff, 2) + Math.pow(xdiff, 2))
 }
 
-function sendMessage(sender, reciever) {
+function sendMessage(sender, reciever, message) {
   const accountSid = "AC680b1c3c3269b9e6728e94d9bf24616b";
   const authToken = "6e7379408f802e5bf3ebf69e0ecf9b1a";
   const client = require("twilio")(accountSid, authToken);
 
   client.messages
     .create({
-      body: "This is the ship that made the Kessel Run in fourteen parsecs?",
+      body: message,
       from: sender,
       to: reciever
     })
