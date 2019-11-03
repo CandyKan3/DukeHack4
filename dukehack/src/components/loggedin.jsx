@@ -10,7 +10,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import MapComponent from "./route";
-import RoutComponent from "./route";
+import RoutComponent from "./route2";
 
 export default class Loggedin extends React.Component {
   constructor(props) {
@@ -39,10 +39,10 @@ export default class Loggedin extends React.Component {
                 >
                   <Card.Header>Welcome {data.email}!</Card.Header>
                   <Card.Body>
-                    <Card.Title>Driver Information</Card.Title>
+                    <Card.Title>Rider Information</Card.Title>
                     <Card.Text>
-                      Your Assignees are:
-                      {data.assigned}
+                      Your Passengers are:
+                      {data.email}
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -69,7 +69,7 @@ export default class Loggedin extends React.Component {
     var that = this;
     var url = "http://localhost:3000/api/data";
 
-    fetch("/api/getuser")
+    fetch("/api/getuserPassenger")
       .then(function(response) {
         if (response.status >= 400) {
           throw new Error("Bad response from server");
@@ -77,7 +77,7 @@ export default class Loggedin extends React.Component {
         return response.json();
       })
       .then(function(data) {
-        that.setState({ data: data.test[0] });
+        that.setState({ data: data });
       });
   }
 }
