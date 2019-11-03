@@ -54,7 +54,7 @@ class SignUp extends React.Component {
           </Col>
               </Form.Group>
         <Form.Group as={Row}>
-          <Col sm={{ span: 10, offset: 4}}>
+          <Col sm={{ span: 10}}>
             <Button size = "lg" type="submit">Register</Button>
           </Col>
         </Form.Group>
