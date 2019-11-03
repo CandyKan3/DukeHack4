@@ -38,9 +38,17 @@ class RoutComponent extends Component {
     });*/
 
     var dirService = new window["google"].maps.DirectionsService();
+    var originObj = new window["google"].maps.LatLng(
+      this.props.origin.lat,
+      this.props.origin.lng
+    );
+    var destinationObj = new window["google"].maps.LatLng(
+      this.props.destination.lat,
+      this.props.destination.lng
+    );
     var dirReq = {
-      origin: "3102 Kings Court, North Carolina",
-      destination: "Talley Student Union, North Carolina",
+      origin: originObj,
+      destination: destinationObj,
       /*waypoints: [
         {
           location: "Joplin, MO",
@@ -82,7 +90,6 @@ class RoutComponent extends Component {
     return (
       <div className="row mt-5">
         <div className="col-md-10 mx-auto">
-          <h2 className="text-left">Google Map</h2>
           <div className="card mt-3">
             <div className="card-body">
               <div ref="map" style={{ width: "100%", height: "400px" }}></div>
