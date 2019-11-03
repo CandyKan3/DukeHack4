@@ -27,13 +27,8 @@ class Rider extends React.Component {
   render() {
     return (
       <div>
-      <h1 className="text-center">
-      Welcome!
-      </h1>
-      <h2 className="text-center">
-      Please fill out the form below to request a ride!
-      </h2>
-      <Card style = {{ width: '80rem', margin: '0 auto', float: 'none', }}>
+      <Card style = {{ width: '80%', margin: '0 auto', marginTop: '.8rem', float: 'none', }}>
+      <Card.Header><h1>Register for a Ride</h1></Card.Header>
       <Card.Body>
       <Form onSubmit={this.handleSubmit}>
       <Form.Row>
@@ -56,13 +51,12 @@ class Rider extends React.Component {
       <Form.Row>
         <Form.Group as={Col} controlId="formGridCity">
           <Form.Label>City</Form.Label>
-          <Form.Control value={this.state.city} onChange={ e => this.setState({ city: e.target.value }) } />
+          <Form.Control value={this.state.city} placeholder="City" onChange={ e => this.setState({ city: e.target.value }) } />
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridState">
           <Form.Label>State</Form.Label>
           <Form.Control as="select" value={this.state.state} onChange={ e => this.setState({ state: e.target.value }) }>
-            <option>Choose...</option>
             <option>North Carolina</option>
             <option>South Carolina</option>
               <option>Virginia</option>
@@ -71,7 +65,7 @@ class Rider extends React.Component {
 
         <Form.Group as={Col} controlId="formGridZip">
           <Form.Label>Zip</Form.Label>
-          <Form.Control value={this.state.zip} onChange={ e => this.setState({ zip : e.target.value }) } />
+          <Form.Control value={this.state.zip} placeholder="Zip" onChange={ e => this.setState({ zip : e.target.value }) } />
         </Form.Group>
       </Form.Row>
 

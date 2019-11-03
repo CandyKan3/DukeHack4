@@ -28,7 +28,7 @@ class SignIn extends React.Component {
          }
     return (
       <div>
-      <Card style = {{ width: '80%', margin: '0 auto',marginTop: '.8rem', float: 'none', }}>
+      <Card style = {{ width: '80%', margin: '0 auto', marginTop: '.8rem', float: 'none', }}>
       <Card.Header><h1>Sign In</h1></Card.Header>
       <Card.Body>
       <Form onSubmit={this.handleSubmit}>
