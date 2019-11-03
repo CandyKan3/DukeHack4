@@ -7,8 +7,8 @@ class RoutComponent extends Component {
 
     this.state = {
       data: [],
-      lat:0,
-      lng:0,
+      lat: 0,
+      lng: 0,
       dates: "",
       notes: ""
     };
@@ -60,8 +60,8 @@ class RoutComponent extends Component {
       this.state.lng
     );
     var destinationObj = new window["google"].maps.LatLng(
-      this.props.destination.lat,
-      this.props.destination.lng
+      this.state.lat2,
+      this.state.lng2
     );
 
     var dirReq = {
@@ -106,16 +106,12 @@ class RoutComponent extends Component {
   };
 
   render() {
- var isEmpty = this.props.origin === undefined;
- if (isEmpty) {
-   return (
-     <p>Loading...</p>
-   ) // note you can also return null here to render nothing
+    var isEmpty = this.props.origin === undefined;
+    if (isEmpty) {
+      return <p>Loading...</p>; // note you can also return null here to render nothing
+    }
 
- }
-
-
-      console.log(this.state.data.lat);
+    console.log(this.state.data.lat);
     return (
       <div className="row mt-5">
         <div className="col-md-10 mx-auto">
@@ -144,7 +140,18 @@ class RoutComponent extends Component {
       })
       .then(function(data) {
         //that.setState({ data: data, lat: data.lat, lng: data.lng });
-      that.setState({data: data, lat: parseFloat(data.lat),lng: parseFloat(data.lng)}, ()=>{console.log(that.state)})
+        that.setState(
+          {
+            data: data,
+            lat: parseFloat(data.result1.lat),
+            lng: parseFloat(data.result1.lng),
+            lat2: parseFloat(data.result2.lat),
+            lng2: parseFloat(data.result2.lng)
+          },
+          () => {
+            console.log(that.state);
+          }
+        );
       });
   }
 }
