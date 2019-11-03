@@ -303,7 +303,7 @@ router.post("/drive", function(req, res, next) {
           });
 
           var sql =
-            "INSERT INTO users(email, password, address, type, assigned, zip, state, city, location) VALUES (?,?,?,?,?, ?, ?, ?, ?)";
+            "INSERT INTO users(email, password, address, type, assigned, zip, state, city, location, driver_cap) VALUES (?,?,?,?,?, ?, ?, ?, ?,4)";
           console.log(sql, d);
           con.query(
             sql,
