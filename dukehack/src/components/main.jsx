@@ -20,6 +20,7 @@ class Main extends React.Component {
             <Button
               variant="primary"
               href="http://www.realityministriesinc.org"
+              size = "lg"
             >
               Learn more about Reality Ministries
             </Button>
