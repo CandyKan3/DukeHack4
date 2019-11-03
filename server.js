@@ -19,6 +19,36 @@ router.get("/getuser", function(req, res, next) {
   console.log(req.cookies.Cookie);
   res.send(req.cookies.Cookie)
 });
+router.get("/getuserid", function(req, res, next) {
+  console.log(req.cookies.Cookie.test[0].id);
+  let a = req.cookies.Cookie.test[0].id
+  let b ="";
+  var con = mysql.createConnection({
+    host: "34.73.223.220",
+    user: "hackduke",
+    password: "oliver",
+    database: "test"
+  });
+  con.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+    var sql = "SELECT * FROM assignment WHERE rider= ?";
+    console.log(sql, a);
+    con.query(sql, [a], function(err, result) {
+      if (err) throw err;
+      console.log(result[0]);
+        a=result[0].driver;
+        var sql = "SELECT * FROM users WHERE id= ?";
+        console.log(sql, a);
+        con.query(sql, [a], function(err, result) {
+          if (err) throw err;
+          console.log(result[0].location);
+          res.send(result[0]);
+        }
+      )
+    })
+  })
+})
 router.get("/getuser2", function(req, res, next) {
   console.log(req.cookies.Cookie.test[0].id);
   let a = req.cookies.Cookie.test[0].id

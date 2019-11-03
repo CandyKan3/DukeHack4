@@ -18,6 +18,7 @@ export default class Loggedin extends React.Component {
 
     this.state = {
       data: [],
+      data2: [],
       lat:0,
       lng:0,
       dates: "",
@@ -29,6 +30,8 @@ export default class Loggedin extends React.Component {
   render() {
     const { data } = this.state;
     console.log({data})
+    const { data2 } = this.state;
+    console.log({data2})
     return (
       <div>
         <Container>
@@ -44,8 +47,8 @@ export default class Loggedin extends React.Component {
                   <Card.Body>
                     <Card.Title>Rider Information</Card.Title>
                     <Card.Text>
-                      You have been assigned to:
-                      {data.assigned}
+                      You have been assigned to ride with:
+                      {data2.email}
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -83,5 +86,16 @@ export default class Loggedin extends React.Component {
         that.setState({data: data.test[0]});
 
       });
+      fetch("/api/getuserid")
+        .then(function(response) {
+          if (response.status >= 400) {
+            throw new Error("Bad response from server");
+          }
+          return response.json();
+        })
+        .then(function(data) {
+          that.setState({data2: data});
+
+        });
   }
 }
