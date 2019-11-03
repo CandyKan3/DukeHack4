@@ -14,9 +14,12 @@ class Main extends React.Component {
       <div>
         <img className="img-responsive" src={logo} width="100%" alt="logo"></img>
         <Jumbotron>
-          <h1>Welcome to Reality Ministries Ride Share</h1>
+          <h1>Welcome top RideShare</h1>
           <p>
-            This site allows volunteers to find members who need rides! Click below to view our website and learn about our mission.
+            Transportation is the bane of our existence at Reality. If someone isn't able to get to one of our programs, it's almost always because they don't have a reliable ride.
+            We have come up with a solution for this problem.
+            We connect you with nearby riders going for the same event and connect riders(if you are a rider) with people who might need a ride.
+            All you have to do is pick an option on the tab above. Wait for the response from the rider.
           </p>
           <p>
             <Button
