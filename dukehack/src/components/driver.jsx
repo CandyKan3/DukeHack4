@@ -25,7 +25,7 @@ class Driver extends React.Component {
   render() {
     return (
       <div>
-        <Card style={{ width: "80rem", margin: "0 auto", marginTop: '.8rem', float: "none" }}>
+        <Card style={{ width: "80%", margin: "0 auto", marginTop: '.8rem', float: "none" }}>
           <Card.Header><h1>Register as a Driver</h1></Card.Header>
           <Card.Body>
             <Form onSubmit={this.handleSubmit}>
@@ -34,7 +34,7 @@ class Driver extends React.Component {
                   <Form.Label>Email</Form.Label>
                   <Form.Control
                     type="email"
-                    placeholder="Enter email"
+                    placeholder="Email"
                     value={this.state.name}
                     onChange={e => this.setState({ name: e.target.value })}
                   />
