@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.34de6062.chunk.css",
+    "main.js": "/static/js/main.2f8ace52.chunk.js",
+    "main.js.map": "/static/js/main.2f8ace52.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1e8f2bae.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1e8f2bae.js.map",
+    "static/css/2.ca26569e.chunk.css": "/static/css/2.ca26569e.chunk.css",
+    "static/js/2.c1371c0e.chunk.js": "/static/js/2.c1371c0e.chunk.js",
+    "static/js/2.c1371c0e.chunk.js.map": "/static/js/2.c1371c0e.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.14903b64bfc28f17a0ea831d57aff365.js": "/precache-manifest.14903b64bfc28f17a0ea831d57aff365.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.ca26569e.chunk.css.map": "/static/css/2.ca26569e.chunk.css.map",
+    "static/css/main.34de6062.chunk.css.map": "/static/css/main.34de6062.chunk.css.map",
+    "static/media/banner.jpg": "/static/media/banner.dc1fcfec.jpg",
+    "static/media/talentshow.jpg": "/static/media/talentshow.c296a82a.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1e8f2bae.js",
+    "static/css/2.ca26569e.chunk.css",
+    "static/js/2.c1371c0e.chunk.js",
+    "static/css/main.34de6062.chunk.css",
+    "static/js/main.2f8ace52.chunk.js"
+  ]
+}

@@ -8,7 +8,6 @@ import Driver from './components/driver.jsx';
 import Info from './components/info.jsx';
 import 'bootswatch/dist/flatly/bootstrap.min.css';
 import Navbar from 'react-bootstrap/Navbar';
-import SignUp from './components/signUp.jsx'
 import Nav from 'react-bootstrap/Nav';
 import SignIn from './components/signIn';
 import Loggedin from './components/loggedin.jsx'
@@ -25,7 +24,6 @@ const routing = (
       <Nav.Link href="/">View Scheduled Pickups</Nav.Link>
     </Nav>
     <Nav>
-        <Nav.Link href="/signup">Sign Up</Nav.Link>
         <Nav.Link href="/signin">Sign In</Nav.Link>
     </Nav>
   </Navbar.Collapse>
@@ -34,7 +32,6 @@ const routing = (
       <Route path="/rider" component={Rider} />
         <Route path="/loggedin" component={Loggedin} />
       <Route path="/driver" component={Driver} />
-      <Route path="/signup" component={SignUp} />
       <Route path="/signin" component={SignIn} />
     </div>
   </Router>
