@@ -28,7 +28,7 @@ class SignIn extends React.Component {
     const redirectToReferrer = this.state.redirect;
     const type = this.state.type;
          if (redirectToReferrer === true) {
-             return <Redirect to="/middle"/>
+            return <Redirect to="/middle"/>
          }
          else if(redirectToReferrer === true){
            return <Redirect to="/middle"/>
@@ -45,7 +45,7 @@ class SignIn extends React.Component {
           </Form.Label>
           <Col sm={8}>
           <Form.Label>Your email</Form.Label>
-            <Form.Control type="email" placeholder="Email"  value={this.state.name} onChange={ e => this.setState({ name : e.target.value }) } />
+            <Form.Control required type="email" placeholder="Email"  value={this.state.name} onChange={ e => this.setState({ name : e.target.value }) } />
           </Col>
         </Form.Group>
 
@@ -56,7 +56,7 @@ class SignIn extends React.Component {
 
           <Col sm={8}>
           <Form.Label>Your password</Form.Label>
-            <Form.Control type="password" placeholder="Password"  value={this.state.password} onChange={ e => this.setState({ password : e.target.value }) }/>
+            <Form.Control required type="password" placeholder="Password"  value={this.state.password} onChange={ e => this.setState({ password : e.target.value }) }/>
           </Col>
         </Form.Group>
         <Form.Group as={Row} controlId="formHorizontal">

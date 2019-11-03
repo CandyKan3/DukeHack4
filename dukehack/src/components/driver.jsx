@@ -37,6 +37,7 @@ class Driver extends React.Component {
                 <Form.Group as={Col} controlId="formGridEmail">
                   <Form.Label>Email</Form.Label>
                   <Form.Control
+                    required
                     type="email"
                     placeholder="Email"
                     value={this.state.name}
@@ -48,6 +49,7 @@ class Driver extends React.Component {
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
+                    required
                     placeholder="Password"
                     value={this.state.password}
                     onChange={e => this.setState({ password: e.target.value })}
@@ -60,6 +62,7 @@ class Driver extends React.Component {
                 <Form.Control
                   placeholder="Apartment, studio, or floor"
                   value={this.state.address}
+                  required
                   onChange={e => this.setState({ address: e.target.value })}
                 />
               </Form.Group>
@@ -69,6 +72,7 @@ class Driver extends React.Component {
                   <Form.Label>City</Form.Label>
                   <Form.Control
                     value={this.state.city}
+                    required
                     onChange={e => this.setState({ city: e.target.value })}
                     placeholder="City"
                   />
@@ -81,7 +85,6 @@ class Driver extends React.Component {
                     value={this.state.state}
                     onChange={e => this.setState({ state: e.target.value })}
                   >
-                    <option>Choose...</option>
                     <option>North Carolina</option>
                     <option>South Carolina</option>
                     <option>Virginia</option>
@@ -92,6 +95,7 @@ class Driver extends React.Component {
                   <Form.Label>Zip</Form.Label>
                   <Form.Control
                     value={this.state.zip}
+                    required
                     onChange={e => this.setState({ zip: e.target.value })}
                     placeholder="Zip"
                   />
