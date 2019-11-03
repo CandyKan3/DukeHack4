@@ -17,12 +17,12 @@ router.get("/", function(req, res, next) {
 });
 router.get("/getuser", function(req, res, next) {
   console.log(req.cookies.Cookie);
-  res.send(req.cookies.Cookie)
+  res.send(req.cookies.Cookie);
 });
 router.get("/getuserid", function(req, res, next) {
   console.log(req.cookies.Cookie.test[0].id);
-  let a = req.cookies.Cookie.test[0].id
-  let b ="";
+  let a = req.cookies.Cookie.test[0].id;
+  let b = "";
   var con = mysql.createConnection({
     host: "34.73.223.220",
     user: "hackduke",
@@ -37,22 +37,21 @@ router.get("/getuserid", function(req, res, next) {
     con.query(sql, [a], function(err, result) {
       if (err) throw err;
       console.log(result[0]);
-        a=result[0].driver;
-        var sql = "SELECT * FROM users WHERE id= ?";
-        console.log(sql, a);
-        con.query(sql, [a], function(err, result) {
-          if (err) throw err;
-          console.log(result[0].location);
-          res.send(result[0]);
-        }
-      )
-    })
-  })
-})
+      a = result[0].driver;
+      var sql = "SELECT * FROM users WHERE id= ?";
+      console.log(sql, a);
+      con.query(sql, [a], function(err, result) {
+        if (err) throw err;
+        console.log(result[0].location);
+        res.send(result[0]);
+      });
+    });
+  });
+});
 router.get("/getuser2", function(req, res, next) {
   console.log(req.cookies.Cookie.test[0].id);
-  let a = req.cookies.Cookie.test[0].id
-  let b ="";
+  let a = req.cookies.Cookie.test[0].id;
+  let b = "";
   var con = mysql.createConnection({
     host: "34.73.223.220",
     user: "hackduke",
@@ -67,27 +66,34 @@ router.get("/getuser2", function(req, res, next) {
     con.query(sql, [a], function(err, result) {
       if (err) throw err;
       console.log(result[0]);
-        a=result[0].driver;
-        var sql = "SELECT * FROM users WHERE id= ?";
-        console.log(sql, a);
-        con.query(sql, [a], function(err, result) {
+      a = result[0].driver;
+      var sql = "SELECT * FROM users WHERE id= ?";
+      console.log(sql, a);
+      con.query(sql, [a], function(err, result) {
+        if (err) throw err;
+        console.log(result[0].location);
+        let b = result[0].location;
+        var sql = "SELECT * FROM location WHERE location_id= ?";
+        console.log(sql, b);
+        con.query(sql, [b], function(err, result) {
           if (err) throw err;
-          console.log(result[0].location);
-          let b= result[0].location
-          var sql = "SELECT * FROM location WHERE location_id= ?";
-          console.log(sql, b);
-          con.query(sql, [b], function(err, result) {
+          console.log(result[0]);
+          var sql =
+            "SELECT ev.event_id, loc.lat, loc.lng  from events ev INNER JOIN location loc ON ev.location=loc.location_id where event_id=1";
+          con.query(sql, [], function(err, result2) {
             if (err) throw err;
-            console.log(result[0]);
-              res.send(result[0]);
-             });
-           });
-            console.log("cooking");
+            console.log(result2[0]);
+            var resJ = {};
+            resJ.result1 = result[0];
+            resJ.result2 = result2[0];
+            res.send(resJ);
           });
-          });
-
+        });
+      });
+      console.log("cooking");
     });
-
+  });
+});
 
 // Post signup
 router.post("/signup", function(req, res, next) {

@@ -19,8 +19,8 @@ export default class Loggedin extends React.Component {
     this.state = {
       data: [],
       data2: [],
-      lat:0,
-      lng:0,
+      lat: 0,
+      lng: 0,
       dates: "",
       notes: ""
     };
@@ -29,9 +29,9 @@ export default class Loggedin extends React.Component {
 
   render() {
     const { data } = this.state;
-    console.log({data})
+    console.log({ data });
     const { data2 } = this.state;
-    console.log({data2})
+    console.log({ data2 });
     return (
       <div>
         <Container>
@@ -59,7 +59,7 @@ export default class Loggedin extends React.Component {
                 lat="0"
                 lng="0"
                 zoom={8}
-                origin={{lat: 0, lng: 0}}
+                origin={{ lat: 0, lng: 0 }}
                 destination={{ lat: 35.7838484, lng: -78.67093919999999 }}
               />
             </Col>
@@ -83,19 +83,17 @@ export default class Loggedin extends React.Component {
         return response.json();
       })
       .then(function(data) {
-        that.setState({data: data.test[0]});
-
+        //that.setState({data: data.test[0]});
       });
-      fetch("/api/getuserid")
-        .then(function(response) {
-          if (response.status >= 400) {
-            throw new Error("Bad response from server");
-          }
-          return response.json();
-        })
-        .then(function(data) {
-          that.setState({data2: data});
-
-        });
+    fetch("/api/getuserid")
+      .then(function(response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        return response.json();
+      })
+      .then(function(data) {
+        that.setState({ data2: data });
+      });
   }
 }
