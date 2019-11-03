@@ -30,7 +30,26 @@ render(){
       <div>
         <Container>
           <Row>
-            <Col>{data}</Col>
+          <div className="row mt-3">
+
+
+            <Col>
+            <Card bg="info" text="white" style={{ width: '30rem', height: '35rem' }}>
+    <Card.Header>Welcome {data.email}!</Card.Header>
+    <Card.Body>
+      <Card.Title>Driver Information</Card.Title>
+      <Card.Text>
+      Your Assignees are:
+      {data.assigned}
+      </Card.Text>
+    </Card.Body>
+  </Card></Col>
+
+
+
+
+
+            </div>
             <Col>
               <RoutComponent
                 lat="0"
@@ -61,7 +80,7 @@ render(){
       return response.json();
     })
     .then(function(data) {
-      that.setState({data: data.test[0].address});
+      that.setState({data: data.test[0]});
     });
   }
 
