@@ -6,11 +6,13 @@ import Table from "react-bootstrap/Table"
 import Card from "react-bootstrap/Card";
 import CardDeck from "react-bootstrap/CardDeck";
 import Maps from "./maps";
+import logo from "./banner.jpg";
 
 class Main extends React.Component {
   render() {
     return (
       <div>
+        <img className="img-responsive" src={logo} width="100%" alt="logo"></img>
         <Jumbotron>
           <h1>Welcome to Reality Ministries Ride Share</h1>
           <p>
