@@ -13,18 +13,25 @@ class SignIn extends React.Component {
   this.state = {
       name: "",
       password: "",
-      redirect: false
+      redirect: false,
+      type: ""
+
     };
 
 
   this.handleSubmit = this.handleSubmit.bind(this);
   this.renderRedirect = this.renderRedirect.bind(this);
 
+
 }
   render() {
     const redirectToReferrer = this.state.redirect;
+    const type = this.state.type;
          if (redirectToReferrer === true) {
-             return <Redirect to="/loggedin"/>
+             return <Redirect to="/middle"/>
+         }
+         else if(redirectToReferrer === true){
+           return <Redirect to="/middle"/>
          }
     return (
       <div>
@@ -65,13 +72,15 @@ class SignIn extends React.Component {
     )
   }
   setRedirect = () => {
+    console.log(this.state.type);
   this.setState({
     redirect: true
   })
-  }
+}
+
   renderRedirect = () => {
   if (this.state.redirect) {
-   return <Redirect to='/' />
+   return <Redirect to='/middle' />
   }
   }
   handleSubmit(event) {
@@ -85,7 +94,8 @@ class SignIn extends React.Component {
      'Content-Type':'application/json'
    },
         body: JSON.stringify(data)}
-      ).then(res => console.log(res)).then(this.setRedirect);
+      ).then(res => console.log(res)
+      ).then(this.setRedirect);
 
     }
 }

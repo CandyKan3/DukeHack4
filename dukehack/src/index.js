@@ -10,7 +10,9 @@ import 'bootswatch/dist/flatly/bootstrap.min.css';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import SignIn from './components/signIn';
-import Loggedin from './components/loggedin.jsx'
+import Loggedin from './components/loggedin.jsx';
+import Middle from './components/middle.jsx';
+import Loggedinrider from './components/loggedinrider.jsx';
 const routing = (
   <Router>
     <div>
@@ -33,6 +35,8 @@ const routing = (
         <Route path="/loggedin" component={Loggedin} />
       <Route path="/driver" component={Driver} />
       <Route path="/signin" component={SignIn} />
+          <Route path="/middle" component={Middle} />
+              <Route path="/loggedinrider" component={Loggedinrider} />
     </div>
   </Router>
 )

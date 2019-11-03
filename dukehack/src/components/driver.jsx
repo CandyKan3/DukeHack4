@@ -115,7 +115,7 @@ class Driver extends React.Component {
   };
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to="/meetings" />;
+      return <Redirect to="/signin" />;
     }
   };
   handleSubmit(event) {

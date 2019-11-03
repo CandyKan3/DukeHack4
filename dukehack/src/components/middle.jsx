@@ -11,6 +11,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import MapComponent from "./route";
 import RoutComponent from "./route";
+import { Redirect } from 'react-router-dom';
 
 export default class Loggedin extends React.Component {
   constructor (props){
@@ -26,34 +27,15 @@ export default class Loggedin extends React.Component {
 
 render(){
  const {data} = this.state;
+ if(data.type==="Rider"){
+      return <Redirect to="/loggedinrider"/>
+ }
+ if(data.type==="Driver"){
+   return <Redirect to="/loggedin"/>
+ }
   return(
       <div>
-        <Container>
-          <Row>
-          <div className="row mt-3">
-            <Col>
-            <Card bg="info" text="white" style={{ width: '30rem', height: '35rem' }}>
-    <Card.Header>Welcome {data.email}!</Card.Header>
-    <Card.Body>
-      <Card.Title>Driver Information</Card.Title>
-      <Card.Text>
-      Your Assignees are:
-      {data.assigned}
-      </Card.Text>
-    </Card.Body>
-  </Card></Col>
-            </div>
-            <Col>
-              <RoutComponent
-                lat="0"
-                lng="0"
-                zoom={8}
-                origin={{ lat: 41.850033, lng: -87.6500523 }}
-                destination={{ lat: 35.7838484, lng: -78.67093919999999 }}
-              />
-            </Col>
-          </Row>
-        </Container>
+
       </div>
     );
   }
