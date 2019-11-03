@@ -1,7 +1,10 @@
 var express = require('express');
 var app = express();
 var router = express.Router();
+var mysql = require('mysql');
 const bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
 app.use(bodyParser.json());
 
 const API_PORT = 5000;
@@ -52,7 +55,32 @@ router.post('/signin', function(req, res, next) {
 
   res.redirect('/');
 });
-
+router.post('/login', function(req, res, next){
+  let a = req.body.email;
+  let b = req.body.password;
+  var con = mysql.createConnection({
+    host: '34.73.223.220',
+    user: 'hackduke',
+    password: 'oliver',
+    database: 'test'
+  });
+  con.connect(function(err) {
+    if (err) throw err;
+    console.log('Connected!');
+    var sql =
+      'SELECT * FROM users WHERE email= ?';
+    console.log(sql, a);
+    con.query(sql,[a], function(err, result) {
+      if (err) throw err;
+      console.log(result[0].password);
+      if(result[0].password == b){
+        res.cookie("Cookie",{test: result});
+        res.redirect('/test');
+        console.log("cooking");
+      }
+    });
+  });
+  });
 router.post('/drive', function(req, res, next) {
   console.log(req.body);
   let a = req.body.username;
@@ -61,25 +89,27 @@ router.post('/drive', function(req, res, next) {
   let c = req.body.state;
   let d = req.body.city;
   let e = req.body.zip;
+  let type = "Driver";
+  let assigned = "No";
   console.log(a);
   console.log(b);
   console.log(c);
   console.log(d);
   console.log(e);
   var con = mysql.createConnection({
-    host: '-',
-    user: '-',
-    password: '-',
-    database: 'crest'
+    host: '34.73.223.220',
+    user: 'hackduke',
+    password: 'oliver',
+    database: 'test'
   });
 
   con.connect(function(err) {
     if (err) throw err;
     console.log('Connected!');
     var sql =
-      'INSERT INTO meetings(name, created, type, notes) VALUES (?,?,?,?)';
+      'INSERT INTO users(email, password, address, type, assigned, zip, state, city) VALUES (?,?,?,?,?, ?, ?, ?)';
     console.log(sql, d);
-    con.query(sql, [a, b, c, d], function(err, result) {
+    con.query(sql, [a, b, bc, type, assigned, e, c, d], function(err, result) {
       if (err) throw err;
       console.log('1 record inserted');
     });
