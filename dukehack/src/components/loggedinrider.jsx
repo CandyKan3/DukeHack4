@@ -18,6 +18,8 @@ export default class Loggedin extends React.Component {
 
     this.state = {
       data: [],
+      lat:0,
+      lng:0,
       dates: "",
       notes: ""
     };
@@ -26,6 +28,7 @@ export default class Loggedin extends React.Component {
 
   render() {
     const { data } = this.state;
+    console.log({data})
     return (
       <div>
         <Container>
@@ -53,7 +56,7 @@ export default class Loggedin extends React.Component {
                 lat="0"
                 lng="0"
                 zoom={8}
-                origin={{ lat: 41.850033, lng: -87.6500523 }}
+                origin={{lat: 0, lng: 0}}
                 destination={{ lat: 35.7838484, lng: -78.67093919999999 }}
               />
             </Col>
@@ -77,7 +80,8 @@ export default class Loggedin extends React.Component {
         return response.json();
       })
       .then(function(data) {
-        that.setState({ data: data.test[0] });
+        that.setState({data: data.test[0]});
+
       });
   }
 }
