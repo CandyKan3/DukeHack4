@@ -12,13 +12,25 @@ import Col from "react-bootstrap/Col";
 import MapComponent from "./route";
 import RoutComponent from "./route";
 
-class Main extends React.Component {
-  render() {
-    return (
+export default class Loggedin extends React.Component {
+  constructor (props){
+  super(props);
+
+  this.state = {
+      data: [],
+      dates: "",
+      notes: "",
+    };
+  this.getData = this.getData.bind(this);
+}
+
+render(){
+ const {data} = this.state;
+  return(
       <div>
         <Container>
           <Row>
-            <Col>Info here</Col>
+            <Col>{data}</Col>
             <Col>
               <RoutComponent lat="0" lng="0" zoom={8} />
             </Col>
@@ -27,5 +39,25 @@ class Main extends React.Component {
       </div>
     );
   }
+  getData(){
+  fetch('/api/getuser')
+  .then(res => res.json())
+  }
+  componentDidMount(){
+    var that = this;
+    var url = 'http://localhost:3000/api/data'
+
+    fetch('/api/getuser')
+    .then(function(response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    })
+    .then(function(data) {
+      that.setState({data: data.test[0].address});
+    });
+  }
+
+
 }
-export default Main;

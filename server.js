@@ -14,6 +14,10 @@ const firebase = require('./database');
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
+router.get('/getuser', function(req, res, next) {
+    console.log(req.cookies.Cookie);
+    res.send(req.cookies.Cookie);
+});
 
 // Post signup
 router.post('/signup', function(req, res, next) {
