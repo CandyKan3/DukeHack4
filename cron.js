@@ -27,19 +27,32 @@ cron.schedule("* * * * *", function() {
         if (err) throw err;
         var eventSQL =
           "SELECT ev.event_id, loc.lat, loc.lng  from events ev INNER JOIN location loc ON ev.location=loc.location_id where event_id=1";
-        con.query(sqlDriver, [], function(err, eventResult) {
+        con.query(eventSQL, [], function(err, eventResult) {
           if (err) throw err;
           for (var i = 0; i < riderResult.length; i++) {
             var minDist = "X";
             var driverID = -1;
             for (var j = 0; j < driverResult.length; j++) {
-              var dist = getDist(riderResult[i], driverResult[j], eventResult);
-              console.log(JSON.stringify(eventResult[i]));
+              var dist = getDist(
+                riderResult[i],
+                driverResult[j],
+                eventResult[0]
+              );
+              console.log(dist);
               if (minDist == "X" || dist < minDist) {
                 minDist = dist;
                 driverID = driverResult[j].id;
-              } //Write Assignment statement here
-              //console.log(driverID);
+              }
+              var assgnSQL =
+                "INSERT IGNORE into assignment (rider, driver, event) VALUES (?,?,?)";
+              con.query(
+                assgnSQL,
+                [riderResult[i].id, driverID, eventResult[0].event_id],
+                function(err, eventResult) {
+                  if (err) throw err;
+                  console.log("1 row inserted");
+                }
+              );
             }
           }
         });
@@ -51,9 +64,9 @@ cron.schedule("* * * * *", function() {
 app.listen(3128);
 
 function getDist(riderResult, driverResult, eventResult) {
-  console.log(driverResult.lng + " " + driverResult.lat);
-  console.log(eventResult.lng + " " + eventResult.lat);
-  console.log(riderResult.lng + " " + riderResult.lat);
+  //console.log(driverResult.lng + " " + driverResult.lat);
+  //console.log(eventResult.lng + " " + eventResult.lat);
+  //console.log(riderResult.lng + " " + riderResult.lat);
   var ydiff = Math.abs(driverResult.lng - eventResult.lng);
   var xdiff = Math.abs(driverResult.lat - eventResult.lat);
   return Math.abs(
