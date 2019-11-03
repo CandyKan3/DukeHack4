@@ -108,6 +108,7 @@ router.post("/drive", function(req, res, next) {
   });
 
   let addressString = bc + "+" + c + "+" + d + "+" + e;
+  console.log(addressString);
   Request.post(
     {
       headers: { "content-type": "application/json" },
@@ -121,35 +122,41 @@ router.post("/drive", function(req, res, next) {
         return console.dir(error);
       }
       body = JSON.parse(body);
-      let place_id = body.results[0].place_id;
-      let lat = body.results[0].geometry.location.lat;
-      let lng = body.results[0].geometry.location.lng;
+      console.log(JSON.stringify(body));
+      if (body.status != "ZERO_RESULTS" && body.status != "REQUEST_DENIED") {
+        let place_id = body.results[0].place_id;
+        let lat = body.results[0].geometry.location.lat;
+        let lng = body.results[0].geometry.location.lng;
 
-      con.connect(function(err) {
-        if (err) throw err;
-        console.log("Connected! HA Ha");
-        var locationSql =
-          "INSERT IGNORE INTO location (location_id, address, city, state, zip, lat, lng) VALUES (?,?,?,?,?,?,?)";
-        console.log(locationSql, d);
-        con.query(locationSql, [place_id, bc, c, d, e, lat, lng], function(
-          err,
-          result
-        ) {
+        con.connect(function(err) {
           if (err) throw err;
-          console.log("1 record inserted");
-        });
+          console.log("Connected! HA Ha");
+          var locationSql =
+            "INSERT IGNORE INTO location (location_id, address, city, state, zip, lat, lng) VALUES (?,?,?,?,?,?,?)";
+          console.log(locationSql, d);
+          con.query(locationSql, [place_id, bc, c, d, e, lat, lng], function(
+            err,
+            result
+          ) {
+            if (err) throw err;
+            console.log("1 record inserted");
+          });
 
-        var sql =
-          "INSERT INTO users(email, password, address, type, assigned, zip, state, city, location) VALUES (?,?,?,?,?, ?, ?, ?, ?)";
-        console.log(sql, d);
-        con.query(sql, [a, b, bc, type, assigned, e, c, d, place_id], function(
-          err,
-          result
-        ) {
-          if (err) throw err;
-          console.log("1 record inserted");
+          var sql =
+            "INSERT INTO users(email, password, address, type, assigned, zip, state, city, location) VALUES (?,?,?,?,?, ?, ?, ?, ?)";
+          console.log(sql, d);
+          con.query(
+            sql,
+            [a, b, bc, type, assigned, e, c, d, place_id],
+            function(err, result) {
+              if (err) throw err;
+              console.log("1 record inserted");
+            }
+          );
         });
-      });
+      } else {
+        console.log("API Error");
+      }
     }
   );
 
@@ -202,35 +209,41 @@ router.post("/ride", function(req, res, next) {
         return console.dir(error);
       }
       body = JSON.parse(body);
-      let place_id = body.results[0].place_id;
-      let lat = body.results[0].geometry.location.lat;
-      let lng = body.results[0].geometry.location.lng;
+      console.log(JSON.stringify(body));
+      if (body.status != "ZERO_RESULTS" && body.status != "REQUEST_DENIED") {
+        let place_id = body.results[0].place_id;
+        let lat = body.results[0].geometry.location.lat;
+        let lng = body.results[0].geometry.location.lng;
 
-      con.connect(function(err) {
-        if (err) throw err;
-        console.log("Connected! HA Ha");
-        var locationSql =
-          "INSERT IGNORE INTO location (location_id, address, city, state, zip, lat, lng) VALUES (?,?,?,?,?,?,?)";
-        console.log(locationSql, d);
-        con.query(locationSql, [place_id, bc, c, d, e, lat, lng], function(
-          err,
-          result
-        ) {
+        con.connect(function(err) {
           if (err) throw err;
-          console.log("1 record inserted " + place_id);
-        });
+          console.log("Connected! HA Ha");
+          var locationSql =
+            "INSERT IGNORE INTO location (location_id, address, city, state, zip, lat, lng) VALUES (?,?,?,?,?,?,?)";
+          console.log(locationSql, d);
+          con.query(locationSql, [place_id, bc, c, d, e, lat, lng], function(
+            err,
+            result
+          ) {
+            if (err) throw err;
+            console.log("1 record inserted " + place_id);
+          });
 
-        var sql =
-          "INSERT INTO users(email, password, address, type, assigned, zip, state, city, location) VALUES (?,?,?,?,?, ?, ?, ?, ?)";
-        console.log(sql, d);
-        con.query(sql, [a, b, bc, type, assigned, e, c, d, place_id], function(
-          err,
-          result
-        ) {
-          if (err) throw err;
-          console.log("1 record inserted");
+          var sql =
+            "INSERT INTO users(email, password, address, type, assigned, zip, state, city, location) VALUES (?,?,?,?,?, ?, ?, ?, ?)";
+          console.log(sql, d);
+          con.query(
+            sql,
+            [a, b, bc, type, assigned, e, c, d, place_id],
+            function(err, result) {
+              if (err) throw err;
+              console.log("1 record inserted");
+            }
+          );
         });
-      });
+      } else {
+        console.log("API Error");
+      }
     }
   );
 

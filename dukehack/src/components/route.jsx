@@ -38,17 +38,17 @@ class RoutComponent extends Component {
     });*/
 
     var dirService = new window["google"].maps.DirectionsService();
-    var originObj = new window["google"].maps.LatLng(
+    /*var originObj = new window["google"].maps.LatLng(
       this.props.origin.lat,
       this.props.origin.lng
-    );
-    var destinationObj = new window["google"].maps.LatLng(
+    );*/
+    /*var destinationObj = new window["google"].maps.LatLng(
       this.props.destination.lat,
       this.props.destination.lng
-    );
+    );*/
     var dirReq = {
-      origin: originObj,
-      destination: destinationObj,
+      origin: "place_id:" + this.props.originId,
+      destination: "place_id:" + this.props.destinationId,
       /*waypoints: [
         {
           location: "Joplin, MO",
