@@ -1,26 +1,27 @@
-var express = require('express');
+var express = require("express");
 var app = express();
 var router = express.Router();
-var mysql = require('mysql');
-const bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
+var mysql = require("mysql");
+var Request = require("request");
+const bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser");
 app.use(cookieParser());
 app.use(bodyParser.json());
 
 const API_PORT = 5000;
-const firebase = require('./database');
+const firebase = require("./database");
 
 // Get homepage
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get("/", function(req, res, next) {
+  res.render("index", { title: "Express" });
 });
-router.get('/getuser', function(req, res, next) {
-    console.log(req.cookies.Cookie);
-    res.send(req.cookies.Cookie);
+router.get("/getuser", function(req, res, next) {
+  console.log(req.cookies.Cookie);
+  res.send(req.cookies.Cookie);
 });
 
 // Post signup
-router.post('/signup', function(req, res, next) {
+router.post("/signup", function(req, res, next) {
   console.log(req.body);
   let email = req.body.email;
   let password = req.body.password;
@@ -33,15 +34,15 @@ router.post('/signup', function(req, res, next) {
       var errorCode = error.code;
       var errorMessage = error.message;
       console.error(
-        'Error:\nCode: ' + errorCode + '\nMessage: ' + errorMessage
+        "Error:\nCode: " + errorCode + "\nMessage: " + errorMessage
       );
     });
 
-  res.redirect('/login');
+  res.redirect("/login");
 });
 
 // Post signin
-router.post('/signin', function(req, res, next) {
+router.post("/signin", function(req, res, next) {
   console.log(req.body);
   let email = req.body.email;
   let password = req.body.password;
@@ -53,38 +54,38 @@ router.post('/signin', function(req, res, next) {
       var errorCode = error.code;
       var errorMessage = errorMessage;
       console.error(
-        'Error:\nCode: ' + errorCode + '\nMessage: ' + errorMessage
+        "Error:\nCode: " + errorCode + "\nMessage: " + errorMessage
       );
     });
 
-  res.redirect('/');
+  res.redirect("/");
 });
-router.post('/login', function(req, res, next) {
+router.post("/login", function(req, res, next) {
   let a = req.body.email;
   let b = req.body.password;
   var con = mysql.createConnection({
-    host: '34.73.223.220',
-    user: 'hackduke',
-    password: 'oliver',
-    database: 'test'
+    host: "34.73.223.220",
+    user: "hackduke",
+    password: "oliver",
+    database: "test"
   });
   con.connect(function(err) {
     if (err) throw err;
-    console.log('Connected!');
-    var sql = 'SELECT * FROM users WHERE email= ?';
+    console.log("Connected!");
+    var sql = "SELECT * FROM users WHERE email= ?";
     console.log(sql, a);
     con.query(sql, [a], function(err, result) {
       if (err) throw err;
       console.log(result[0].password);
       if (result[0].password == b) {
-        res.cookie('Cookie', { test: result });
-        res.json({body: result[0]});
-        console.log('cooking');
+        res.cookie("Cookie", { test: result });
+        res.json({ body: result[0] });
+        console.log("cooking");
       }
     });
   });
 });
-router.post('/drive', function(req, res, next) {
+router.post("/drive", function(req, res, next) {
   console.log(req.body);
   let a = req.body.username;
   let b = req.body.password;
@@ -92,34 +93,80 @@ router.post('/drive', function(req, res, next) {
   let c = req.body.state;
   let d = req.body.city;
   let e = req.body.zip;
-  let type = 'Driver';
-  let assigned = 'No';
+  let type = "Driver";
+  let assigned = "No";
   console.log(a);
   console.log(b);
   console.log(c);
   console.log(d);
   console.log(e);
   var con = mysql.createConnection({
-    host: '34.73.223.220',
-    user: 'hackduke',
-    password: 'oliver',
-    database: 'test'
+    host: "34.73.223.220",
+    user: "hackduke",
+    password: "oliver",
+    database: "test"
   });
 
-  con.connect(function(err) {
+  let addressString = bc + "+" + c + "+" + d + "+" + e;
+  Request.post(
+    {
+      headers: { "content-type": "application/json" },
+      url:
+        "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+        addressString +
+        "&key=AIzaSyBCUiun3GfVhDIslkBV4Cf657dkStM-z80"
+    },
+    (error, response, body) => {
+      if (error) {
+        return console.dir(error);
+      }
+      body = JSON.parse(body);
+      let place_id = body.results[0].place_id;
+      let lat = body.results[0].geometry.location.lat;
+      let lng = body.results[0].geometry.location.lng;
+
+      con.connect(function(err) {
+        if (err) throw err;
+        console.log("Connected! HA Ha");
+        var locationSql =
+          "INSERT IGNORE INTO location (location_id, address, city, state, zip, lat, lng) VALUES (?,?,?,?,?,?,?)";
+        console.log(locationSql, d);
+        con.query(locationSql, [place_id, bc, c, d, e, lat, lng], function(
+          err,
+          result
+        ) {
+          if (err) throw err;
+          console.log("1 record inserted");
+        });
+
+        var sql =
+          "INSERT INTO users(email, password, address, type, assigned, zip, state, city, location) VALUES (?,?,?,?,?, ?, ?, ?, ?)";
+        console.log(sql, d);
+        con.query(sql, [a, b, bc, type, assigned, e, c, d, place_id], function(
+          err,
+          result
+        ) {
+          if (err) throw err;
+          console.log("1 record inserted");
+        });
+      });
+    }
+  );
+
+  /*con.connect(function(err) {
     if (err) throw err;
-    console.log('Connected!');
+    console.log("Connected!");
     var sql =
-      'INSERT INTO users(email, password, address, type, assigned, zip, state, city) VALUES (?,?,?,?,?, ?, ?, ?)';
+      "INSERT INTO users(email, password, address, type, assigned, zip, state, city) VALUES (?,?,?,?,?, ?, ?, ?)";
     console.log(sql, d);
     con.query(sql, [a, b, bc, type, assigned, e, c, d], function(err, result) {
       if (err) throw err;
-      console.log('1 record inserted');
+      console.log("1 record inserted");
     });
-  });
-  res.redirect('/login');
+  });*/
+  res.redirect("/login");
 });
-router.post('/ride', function(req, res, next) {
+router.post("/ride", function(req, res, next) {
   console.log(req.body);
   let a = req.body.username;
   let b = req.body.password;
@@ -127,33 +174,79 @@ router.post('/ride', function(req, res, next) {
   let c = req.body.state;
   let d = req.body.city;
   let e = req.body.zip;
-  let type = 'Rider';
-  let assigned = 'No';
+  let type = "Rider";
+  let assigned = "No";
   console.log(a);
   console.log(b);
   console.log(c);
   console.log(d);
   console.log(e);
   var con = mysql.createConnection({
-    host: '34.73.223.220',
-    user: 'hackduke',
-    password: 'oliver',
-    database: 'test'
+    host: "34.73.223.220",
+    user: "hackduke",
+    password: "oliver",
+    database: "test"
   });
 
-  con.connect(function(err) {
+  let addressString = bc + "+" + c + "+" + d + "+" + e;
+  Request.post(
+    {
+      headers: { "content-type": "application/json" },
+      url:
+        "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+        addressString +
+        "&key=AIzaSyBCUiun3GfVhDIslkBV4Cf657dkStM-z80"
+    },
+    (error, response, body) => {
+      if (error) {
+        return console.dir(error);
+      }
+      body = JSON.parse(body);
+      let place_id = body.results[0].place_id;
+      let lat = body.results[0].geometry.location.lat;
+      let lng = body.results[0].geometry.location.lng;
+
+      con.connect(function(err) {
+        if (err) throw err;
+        console.log("Connected! HA Ha");
+        var locationSql =
+          "INSERT IGNORE INTO location (location_id, address, city, state, zip, lat, lng) VALUES (?,?,?,?,?,?,?)";
+        console.log(locationSql, d);
+        con.query(locationSql, [place_id, bc, c, d, e, lat, lng], function(
+          err,
+          result
+        ) {
+          if (err) throw err;
+          console.log("1 record inserted " + place_id);
+        });
+
+        var sql =
+          "INSERT INTO users(email, password, address, type, assigned, zip, state, city, location) VALUES (?,?,?,?,?, ?, ?, ?, ?)";
+        console.log(sql, d);
+        con.query(sql, [a, b, bc, type, assigned, e, c, d, place_id], function(
+          err,
+          result
+        ) {
+          if (err) throw err;
+          console.log("1 record inserted");
+        });
+      });
+    }
+  );
+
+  /*con.connect(function(err) {
     if (err) throw err;
-    console.log('Connected!');
+    console.log("Connected!");
     var sql =
-      'INSERT INTO users(email, password, address, type, assigned, zip, state, city) VALUES (?,?,?,?,?, ?, ?, ?)';
+      "INSERT INTO users(email, password, address, type, assigned, zip, state, city) VALUES (?,?,?,?,?, ?, ?, ?)";
     console.log(sql, d);
     con.query(sql, [a, b, bc, type, assigned, e, c, d], function(err, result) {
       if (err) throw err;
-      console.log('1 record inserted');
+      console.log("1 record inserted");
     });
-  });
-  res.redirect('/login');
+  });*/
+  res.redirect("/login");
 });
-app.use('/api', router);
+app.use("/api", router);
 
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
