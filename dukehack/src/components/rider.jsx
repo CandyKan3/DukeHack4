@@ -74,11 +74,6 @@ class Rider extends React.Component {
           <Form.Control required value={this.state.zip} placeholder="Zip" onChange={ e => this.setState({ zip : e.target.value }) } />
         </Form.Group>
       </Form.Row>
-
-      <Form.Group id="formGridCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-
       <Button variant="primary" type="submit">
         Submit
       </Button>
