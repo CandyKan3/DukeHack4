@@ -84,28 +84,35 @@ class Rider extends React.Component {
     )
   }
   setRedirect = () => {
-  this.setState({
-    redirect: true
-  })
-  }
+    this.setState({
+      redirect: true
+    });
+  };
   renderRedirect = () => {
-  if (this.state.redirect) {
-   return <Redirect to='/meetings' />
-  }
-  }
-  handleSubmit(event) {
-      event.preventDefault();
-      const data ={"username": this.state.name, "password": this.state.password, "address": this.state.address, "city": this.state.zip, "state": this.state.state
-    , "zip": this.state.zip}
-      console.log(data);
-      fetch('/api/ride', {
-        method: 'POST',
-        headers: {
-     'Content-Type':'application/json'
-   },
-        body: JSON.stringify(data)}
-      ).then(res => console.log(res)).then(this.setRedirect);
-
+    if (this.state.redirect) {
+      return <Redirect to="/signin" />;
     }
+  };
+  handleSubmit(event) {
+    event.preventDefault();
+    const data = {
+      username: this.state.name,
+      password: this.state.password,
+      address: this.state.address,
+      city: this.state.zip,
+      state: this.state.state,
+      zip: this.state.zip
+    };
+    console.log(data);
+    fetch("/api/ride", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => console.log(res))
+      .then(this.setRedirect);
+  }
 }
 export default Rider

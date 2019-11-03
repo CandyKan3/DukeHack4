@@ -78,7 +78,7 @@ router.post('/login', function(req, res, next) {
       console.log(result[0].password);
       if (result[0].password == b) {
         res.cookie('Cookie', { test: result });
-        res.redirect('/test');
+        res.json({body: result[0]});
         console.log('cooking');
       }
     });
@@ -127,14 +127,33 @@ router.post('/ride', function(req, res, next) {
   let c = req.body.state;
   let d = req.body.city;
   let e = req.body.zip;
+  let type = 'Rider';
+  let assigned = 'No';
   console.log(a);
   console.log(b);
   console.log(c);
   console.log(d);
   console.log(e);
+  var con = mysql.createConnection({
+    host: '34.73.223.220',
+    user: 'hackduke',
+    password: 'oliver',
+    database: 'test'
+  });
+
+  con.connect(function(err) {
+    if (err) throw err;
+    console.log('Connected!');
+    var sql =
+      'INSERT INTO users(email, password, address, type, assigned, zip, state, city) VALUES (?,?,?,?,?, ?, ?, ?)';
+    console.log(sql, d);
+    con.query(sql, [a, b, bc, type, assigned, e, c, d], function(err, result) {
+      if (err) throw err;
+      console.log('1 record inserted');
+    });
+  });
   res.redirect('/login');
 });
-
 app.use('/api', router);
 
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));

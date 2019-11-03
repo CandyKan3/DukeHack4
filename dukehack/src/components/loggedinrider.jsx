@@ -35,9 +35,9 @@ render(){
             <Card bg="info" text="white" style={{ width: '30rem', height: '35rem' }}>
     <Card.Header>Welcome {data.email}!</Card.Header>
     <Card.Body>
-      <Card.Title>Driver Information</Card.Title>
+      <Card.Title>Rider Information</Card.Title>
       <Card.Text>
-      Your Assignees are:
+      You have been assigned to: 
       {data.assigned}
       </Card.Text>
     </Card.Body>
