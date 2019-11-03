@@ -67,13 +67,20 @@ router.get("/getuserPassenger", function(req, res, next) {
     con.query(sql, [a], function(err, result) {
       if (err) throw err;
       console.log(result[0]);
-      var b = result[0].rider;
-      var sql = "SELECT * FROM users WHERE id= ?";
+      var riders = [];
+      for (var i = 0; i < result.length; i++) {
+        riders.push(result[i].rider);
+      }
+      var b = riders.toString();
+      var sql = "SELECT * FROM users WHERE id IN(" + b + ")";
       console.log(sql, b);
-      con.query(sql, [b], function(err, result) {
+      con.query(sql, [], function(err, result2) {
         if (err) throw err;
-        console.log(result[0].location);
-        res.send(result[0]);
+        var resA = [];
+        for (var i = 0; i < result2.length; i++) {
+          resA.push(result2[i].email);
+        }
+        res.send(resA);
       });
     });
   });
