@@ -55,7 +55,7 @@ render(){
       return response.json();
     })
     .then(function(data) {
-      that.setState({data: data.test[0]});
+      that.setState({data: data});
     });
   }
 
