@@ -37,12 +37,12 @@ export default class Loggedin extends React.Component {
                   text="white"
                   style={{ width: "30rem", height: "35rem" }}
                 >
-                  <Card.Header>Welcome {data.email}!</Card.Header>
+                  <Card.Header>Welcome</Card.Header>
                   <Card.Body>
                     <Card.Title>Rider Information</Card.Title>
                     <Card.Text>
                       Your Passengers are:
-                      {data.email}
+                      {" " + data.join(", ")}
                     </Card.Text>
                   </Card.Body>
                 </Card>
