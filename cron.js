@@ -51,6 +51,14 @@ cron.schedule("* * * * *", function() {
                 function(err, eventResult) {
                   if (err) throw err;
                   console.log("1 row inserted");
+                  var updateUsr =
+                    "UPDATE users SET driver_cap=driver_cap-1 WHERE id=" +
+                    driverID +
+                    " and driver_cap > 0";
+                  con.query(updateUsr, [], function(err, eventResult) {
+                    if (err) throw err;
+                    console.log("1 row inserted");
+                  });
                 }
               );
             }
