@@ -2,7 +2,19 @@ import React, { Component } from "react";
 import { throwStatement } from "@babel/types";
 
 class RoutComponent extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: [],
+      lat:0,
+      lng:0,
+      dates: "",
+      notes: ""
+    };
+    this.getData = this.getData.bind(this);
+  }
+  componentDidUpdate() {
     this.renderMap();
   }
 
@@ -25,8 +37,8 @@ class RoutComponent extends Component {
 
   loadMap = () => {
     var centerObj = new window["google"].maps.LatLng(
-      this.props.lat,
-      this.props.lng
+      this.state.lat,
+      this.state.lng
     );
 
     var map = new window["google"].maps.Map(this.refs.map, {
@@ -44,8 +56,8 @@ class RoutComponent extends Component {
 
     var dirService = new window["google"].maps.DirectionsService();
     var originObj = new window["google"].maps.LatLng(
-      this.props.origin.lat,
-      this.props.origin.lng
+      this.state.lat,
+      this.state.lng
     );
     var destinationObj = new window["google"].maps.LatLng(
       this.props.destination.lat,
@@ -92,7 +104,18 @@ class RoutComponent extends Component {
       infowindow.open(map, marker);
     });*/
   };
+
   render() {
+ var isEmpty = this.props.origin === undefined;
+ if (isEmpty) {
+   return (
+     <p>Loading...</p>
+   ) // note you can also return null here to render nothing
+
+ }
+
+
+      console.log(this.state.data.lat);
     return (
       <div className="row mt-5">
         <div className="col-md-10 mx-auto">
@@ -104,6 +127,25 @@ class RoutComponent extends Component {
         </div>
       </div>
     );
+  }
+  getData() {
+    fetch("/api/getuser2").then(res => res.json());
+  }
+  componentWillMount() {
+    var that = this;
+    var url = "http://localhost:3000/api/data";
+
+    fetch("/api/getuser2")
+      .then(function(response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        return response.json();
+      })
+      .then(function(data) {
+        //that.setState({ data: data, lat: data.lat, lng: data.lng });
+      that.setState({data: data, lat: parseFloat(data.lat),lng: parseFloat(data.lng)}, ()=>{console.log(that.state)})
+      });
   }
 }
 

@@ -18,6 +18,8 @@ export default class Loggedin extends React.Component {
 
     this.state = {
       data: [],
+      lat:0,
+      lng:0,
       dates: "",
       notes: ""
     };
@@ -25,7 +27,11 @@ export default class Loggedin extends React.Component {
   }
 
   render() {
-    const { data } = this.state;
+    const { data } = this.state
+  const lat2 = parseFloat(this.state.lat)
+  const lng2 = parseFloat(this.state.lng)
+    let c = {lat:lat2,lng:lng2}
+  
     return (
       <div>
         <Container>
@@ -37,7 +43,7 @@ export default class Loggedin extends React.Component {
                   text="white"
                   style={{ width: "30rem", height: "35rem" }}
                 >
-                  <Card.Header>Welcome {data.email}!</Card.Header>
+                  <Card.Header>Welcome {data.lat}!</Card.Header>
                   <Card.Body>
                     <Card.Title>Rider Information</Card.Title>
                     <Card.Text>
@@ -53,7 +59,7 @@ export default class Loggedin extends React.Component {
                 lat="0"
                 lng="0"
                 zoom={8}
-                origin={{ lat: 41.850033, lng: -87.6500523 }}
+                origin={c}
                 destination={{ lat: 35.7838484, lng: -78.67093919999999 }}
               />
             </Col>
@@ -63,13 +69,13 @@ export default class Loggedin extends React.Component {
     );
   }
   getData() {
-    fetch("/api/getuser").then(res => res.json());
+    fetch("/api/getuser2").then(res => res.json());
   }
   componentDidMount() {
     var that = this;
     var url = "http://localhost:3000/api/data";
 
-    fetch("/api/getuser")
+    fetch("/api/getuser2")
       .then(function(response) {
         if (response.status >= 400) {
           throw new Error("Bad response from server");
@@ -77,7 +83,8 @@ export default class Loggedin extends React.Component {
         return response.json();
       })
       .then(function(data) {
-        that.setState({ data: data.test[0] });
+        that.setState({ data: data, lat: data.lat, lng: data.lng });
+
       });
   }
 }
