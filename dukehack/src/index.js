@@ -23,7 +23,7 @@ const routing = (
     <Nav className="mr-auto">
       <Nav.Link href="/rider">Request a Pickup</Nav.Link>
       <Nav.Link href="/driver">Register as Driver</Nav.Link>
-      <Nav.Link href="/">View Scheduled Pickups</Nav.Link>
+      <Nav.Link href="/signin">View Scheduled Pickups</Nav.Link>
     </Nav>
     <Nav>
         <Nav.Link href="/signin">Sign In</Nav.Link>
