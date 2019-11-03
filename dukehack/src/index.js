@@ -1,23 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
-import App from './App'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 import Main from './components/main.jsx';
 import Rider from './components/rider.jsx';
 import Driver from './components/driver.jsx';
 import Info from './components/info.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
 import SignUp from './components/signUp.jsx'
 import Nav from 'react-bootstrap/Nav';
-import CreateAccount from './components/createaccount';
 import SignIn from './components/signIn';
-import Login from './components/login.jsx';
 
 const routing = (
   <Router>
@@ -30,7 +23,7 @@ const routing = (
       <Nav.Link href="/info">Information</Nav.Link>
       <Nav.Link href="/rider">Request a Pickup</Nav.Link>
       <Nav.Link href="/driver">Register as Driver</Nav.Link>
-      <Nav.Link href="/login">View Scheduled Pickups</Nav.Link>
+      <Nav.Link href="/">View Scheduled Pickups</Nav.Link>
     </Nav>
     <Nav>
         <Nav.Link href="/signup">Sign Up</Nav.Link>

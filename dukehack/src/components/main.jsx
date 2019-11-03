@@ -1,12 +1,9 @@
 import React from "react";
 import logo from "./banner.jpg";
-import real from "./real.jpg";
 import talent from "./talentshow.jpg";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
-import Image from "react-bootstrap/Image";
 import CardDeck from "react-bootstrap/CardDeck";
 import Maps from "./maps";
 
