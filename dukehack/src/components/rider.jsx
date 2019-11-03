@@ -25,6 +25,12 @@ class Rider extends React.Component {
 
 }
   render() {
+    const redirectToReferrer = this.state.redirect;
+         if (redirectToReferrer === true) {
+             return <Redirect to="/signin"/>
+         }
+
+
     return (
       <div>
       <Card style = {{ width: '80%', margin: '0 auto', marginTop: '.8rem', float: 'none', }}>
@@ -34,24 +40,24 @@ class Rider extends React.Component {
       <Form.Row>
         <Form.Group as={Col} controlId="formGridEmail">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" value={this.state.name} onChange={ e => this.setState({ name : e.target.value }) }/>
+          <Form.Control type="email" required placeholder="Enter email" value={this.state.name} onChange={ e => this.setState({ name : e.target.value }) }/>
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" value={this.state.password} onChange={ e => this.setState({password: e.target.value }) }/>
+          <Form.Control type="password" required placeholder="Password" value={this.state.password} onChange={ e => this.setState({password: e.target.value }) }/>
         </Form.Group>
       </Form.Row>
 
       <Form.Group controlId="formGridAddress2">
         <Form.Label>Address</Form.Label>
-        <Form.Control placeholder="Apartment, studio, or floor" value={this.state.address} onChange={ e => this.setState({ address : e.target.value }) }/>
+        <Form.Control required placeholder="Apartment, studio, or floor" value={this.state.address} onChange={ e => this.setState({ address : e.target.value }) }/>
       </Form.Group>
 
       <Form.Row>
         <Form.Group as={Col} controlId="formGridCity">
           <Form.Label>City</Form.Label>
-          <Form.Control value={this.state.city} placeholder="City" onChange={ e => this.setState({ city: e.target.value }) } />
+          <Form.Control required value={this.state.city} placeholder="City" onChange={ e => this.setState({ city: e.target.value }) } />
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridState">
@@ -65,7 +71,7 @@ class Rider extends React.Component {
 
         <Form.Group as={Col} controlId="formGridZip">
           <Form.Label>Zip</Form.Label>
-          <Form.Control value={this.state.zip} placeholder="Zip" onChange={ e => this.setState({ zip : e.target.value }) } />
+          <Form.Control required value={this.state.zip} placeholder="Zip" onChange={ e => this.setState({ zip : e.target.value }) } />
         </Form.Group>
       </Form.Row>
 
