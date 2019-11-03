@@ -28,7 +28,7 @@ class SignUp extends React.Component {
          }
     return (
       <div>
-      <Card style = {{ width: '25rem', margin: '0 auto',marginTop: '.8rem', float: 'none', }} >
+      <Card style = {{ width: '70em', margin: '0 auto',marginTop: '.8rem', float: 'none', }} >
 
       <Card.Body>
       <Form onSubmit={this.handleSubmit}>
