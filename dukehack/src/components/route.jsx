@@ -24,8 +24,13 @@ class RoutComponent extends Component {
   };
 
   loadMap = () => {
+    var centerObj = new window["google"].maps.LatLng(
+      this.props.lat,
+      this.props.lng
+    );
+
     var map = new window["google"].maps.Map(this.refs.map, {
-      center: { lat: this.props.lat, lng: this.props.lng },
+      center: centerObj,
       zoom: this.props.zoom
     });
 
@@ -38,17 +43,18 @@ class RoutComponent extends Component {
     });*/
 
     var dirService = new window["google"].maps.DirectionsService();
-    /*var originObj = new window["google"].maps.LatLng(
+    var originObj = new window["google"].maps.LatLng(
       this.props.origin.lat,
       this.props.origin.lng
-    );*/
-    /*var destinationObj = new window["google"].maps.LatLng(
+    );
+    var destinationObj = new window["google"].maps.LatLng(
       this.props.destination.lat,
       this.props.destination.lng
-    );*/
+    );
+
     var dirReq = {
-      origin: "place_id:" + this.props.originId,
-      destination: "place_id:" + this.props.destinationId,
+      origin: originObj,
+      destination: destinationObj,
       /*waypoints: [
         {
           location: "Joplin, MO",
@@ -69,7 +75,7 @@ class RoutComponent extends Component {
     };
 
     dirService.route(dirReq, function(response, status) {
-      if (status == window["google"].maps.DirectionsStatus.OK) {
+      if (status === window["google"].maps.DirectionsStatus.OK) {
         new window["google"].maps.DirectionsRenderer({
           map: map,
           directions: response

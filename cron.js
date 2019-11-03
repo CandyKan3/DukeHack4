@@ -58,6 +58,7 @@ cron.schedule("* * * * *", function() {
                   con.query(updateUsr, [], function(err, eventResult) {
                     if (err) throw err;
                     console.log("1 row inserted");
+                    sendMessage("+17325079330", "+4157699020");
                   });
                 }
               );
@@ -83,4 +84,18 @@ function getDist(riderResult, driverResult, eventResult) {
       driverResult.lat * eventResult.lng -
       driverResult.lng * eventResult.lat
   ); // Math.sqrt(Math.pow(ydiff, 2) + Math.pow(xdiff, 2))
+}
+
+function sendMessage(sender, reciever) {
+  const accountSid = "AC680b1c3c3269b9e6728e94d9bf24616b";
+  const authToken = "6e7379408f802e5bf3ebf69e0ecf9b1a";
+  const client = require("twilio")(accountSid, authToken);
+
+  client.messages
+    .create({
+      body: "This is the ship that made the Kessel Run in fourteen parsecs?",
+      from: sender,
+      to: reciever
+    })
+    .then(message => console.log(message.sid));
 }
