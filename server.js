@@ -48,6 +48,37 @@ router.get("/getuserid", function(req, res, next) {
     });
   });
 });
+
+router.get("/getuserPassenger", function(req, res, next) {
+  console.log(req.cookies.Cookie.test[0].id);
+  let a = req.cookies.Cookie.test[0].id;
+  let b = "";
+  var con = mysql.createConnection({
+    host: "34.73.223.220",
+    user: "hackduke",
+    password: "oliver",
+    database: "test"
+  });
+  con.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+    var sql = "SELECT * FROM assignment WHERE driver= ?";
+    console.log(sql, a);
+    con.query(sql, [a], function(err, result) {
+      if (err) throw err;
+      console.log(result[0]);
+      var b = result[0].rider;
+      var sql = "SELECT * FROM users WHERE id= ?";
+      console.log(sql, b);
+      con.query(sql, [b], function(err, result) {
+        if (err) throw err;
+        console.log(result[0].location);
+        res.send(result[0]);
+      });
+    });
+  });
+});
+
 router.get("/getuser2", function(req, res, next) {
   console.log(req.cookies.Cookie.test[0].id);
   let a = req.cookies.Cookie.test[0].id;

@@ -42,7 +42,7 @@ export default class Loggedin extends React.Component {
                     <Card.Title>Rider Information</Card.Title>
                     <Card.Text>
                       Your Passengers are:
-                      {data.assigned}
+                      {data.email}
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -69,7 +69,7 @@ export default class Loggedin extends React.Component {
     var that = this;
     var url = "http://localhost:3000/api/data";
 
-    fetch("/api/getuser")
+    fetch("/api/getuserPassenger")
       .then(function(response) {
         if (response.status >= 400) {
           throw new Error("Bad response from server");
@@ -77,7 +77,7 @@ export default class Loggedin extends React.Component {
         return response.json();
       })
       .then(function(data) {
-        //that.setState({ data: data.test[0] });
+        that.setState({ data: data });
       });
   }
 }
