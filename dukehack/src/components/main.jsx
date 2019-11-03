@@ -31,7 +31,7 @@ class Main extends React.Component {
 
         <div style={{ padding: " 0 32px" }}>
           <h2>Upcoming Events</h2>
-          <Table responsive>
+          <Table responsive hover size="sm">
             <thead>
               <tr>
                 <th>Date</th>
