@@ -11,7 +11,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import SignUp from './components/signUp.jsx'
 import Nav from 'react-bootstrap/Nav';
 import SignIn from './components/signIn';
-
+import Loggedin from './components/loggedin.jsx'
 const routing = (
   <Router>
     <div>
@@ -34,6 +34,7 @@ const routing = (
       <Route exact path="/" component={Main} />
         <Route path="/info" component={Info} />
       <Route path="/rider" component={Rider} />
+        <Route path="/loggedin" component={Loggedin} />
       <Route path="/driver" component={Driver} />
       <Route path="/signup" component={SignUp} />
       <Route path="/signin" component={SignIn} />
